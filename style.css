@@ -1,0 +1,914 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* Definición de variables de color: Blanco, Negro y Acentos Elegantes */
+:root {
+    --primary-black: #1A1A1A; /* Negro principal, no absoluto, para suavidad */
+    --secondary-white: #F8F8F8; /* Blanco suave, casi perla */
+    --accent-cerulean-blue: #007BA7; /* Azul cerúleo vibrante y elegante */
+    --accent-soft-gold: #B8860B; /* Oro suave para toques de lujo */
+    --neutral-dark-gray: #333333; /* Gris oscuro para transiciones y sombras */
+    --neutral-light-gray: #CCCCCC; /* Gris claro para fondos sutiles */
+    --text-dark: var(--primary-black); /* Color de texto para fondos claros */
+    --text-light: var(--secondary-white); /* Color de texto para fondos oscuros */
+    --shadow-strong: 0 8px 16px rgba(0, 0, 0, 0.4);
+    --shadow-soft: 0 4px 8px rgba(0, 0, 0, 0.2);
+    --border-radius-card: 15px; /* Bordes más pronunciados para tarjetas */
+    --border-radius-general: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.8;
+    color: var(--text-light); /* Texto blanco por defecto */
+    background-color: var(--neutral-dark-gray); /* Fondo general en gris oscuro */
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+/* Overlay de Contraseña */
+#password-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-black), var(--neutral-dark-gray)); /* Gradiente de negros y grises */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: var(--text-light);
+    text-align: center;
+    flex-direction: column;
+}
+
+.password-box {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo blanco semitransparente */
+    padding: 50px;
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-strong);
+    max-width: 500px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.password-box p {
+    font-size: 1.4rem;
+    margin-bottom: 30px;
+    font-family: 'Playfair Display', serif;
+    color: var(--text-light);
+}
+
+#password-input {
+    width: calc(100% - 20px);
+    padding: 16px;
+    margin-bottom: 30px;
+    border: 1px solid var(--accent-soft-gold); /* Borde dorado suave */
+    border-radius: var(--border-radius-general);
+    font-size: 1.2rem;
+    background-color: rgba(255, 255, 255, 0.05); /* Muy ligero blanco para input */
+    color: var(--text-light);
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+}
+
+#password-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+#enter-button {
+    background-color: var(--accent-cerulean-blue); /* Azul Cerúleo */
+    color: var(--secondary-white);
+    padding: 16px 35px;
+    border: none;
+    border-radius: var(--border-radius-general);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#enter-button:hover {
+    background-color: var(--accent-soft-gold); /* Oro suave en hover */
+    transform: translateY(-4px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.error-text {
+    color: #FF6347; /* Un rojo claro para errores */
+    margin-top: 20px;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+/* Header y Navegación */
+header {
+    background-color: var(--primary-black); /* Negro principal para el header */
+    color: var(--text-light);
+    padding: 2rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: var(--shadow-strong);
+    border-bottom: 2px solid var(--accent-soft-gold); /* Línea inferior dorada */
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--accent-cerulean-blue); /* Azul Cerúleo para el logo */
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.1);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 40px;
+}
+
+nav ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+nav ul li a:hover {
+    color: var(--accent-soft-gold); /* Oro suave en hover */
+    transform: translateY(-3px);
+}
+
+/* Hero Section */
+#hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://via.placeholder.com/1500x600/333333/F8F8F8?text=Nuestros+Momentos+Dorados') no-repeat center center/cover;
+    background-blend-mode: multiply;
+    color: var(--text-light);
+    text-align: center;
+    padding: 180px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 650px;
+    border-bottom: 10px solid var(--accent-cerulean-blue); /* Borde inferior Azul Cerúleo */
+    box-shadow: inset 0 -15px 30px rgba(0,0,0,0.4);
+}
+
+#hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 5.5rem;
+    margin-bottom: 30px;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.9);
+    color: var(--secondary-white);
+}
+
+#hero p {
+    font-size: 2rem;
+    max-width: 1000px;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+    color: var(--secondary-white);
+}
+
+/* Sección Principal de Galería */
+.gallery-main-section {
+    padding: 100px 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: var(--secondary-white); /* Fondo blanco suave para la galería */
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-strong);
+    color: var(--text-dark); /* Texto negro para esta sección */
+    border: 1px solid var(--neutral-light-gray);
+}
+
+.gallery-main-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--primary-black); /* Negro para el título */
+    margin-bottom: 90px;
+    position: relative;
+    display: inline-block;
+}
+
+.gallery-main-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -25px;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 8px;
+    background-color: var(--accent-cerulean-blue); /* Azul Cerúleo */
+    border-radius: 5px;
+}
+
+/* Estilos para cada categoría de galería */
+.gallery-category {
+    margin-bottom: 120px;
+    text-align: center;
+}
+
+.gallery-category h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: var(--neutral-dark-gray); /* Gris oscuro */
+    margin-bottom: 70px;
+    position: relative;
+    display: inline-block;
+}
+
+.gallery-category h3::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -18px;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 6px;
+    background-color: var(--accent-soft-gold); /* Oro suave */
+    border-radius: 5px;
+}
+
+/* Estilos de la cuadrícula de la galería */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius-general);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--primary-black); /* Fondo negro para los ítems */
+    border: 2px solid var(--neutral-light-gray); /* Borde gris claro */
+}
+
+.gallery-item:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+    border-radius: var(--border-radius-general) var(--border-radius-general) 0 0;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-item .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: var(--text-light);
+    font-size: 5rem;
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border: 4px solid var(--accent-cerulean-blue);
+}
+
+.gallery-item:hover .play-icon {
+    opacity: 1;
+}
+
+/* Sección de Canciones */
+.songs-section {
+    padding: 100px 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    text-align: center;
+    background-color: var(--primary-black); /* Fondo negro para la sección de canciones */
+    color: var(--text-light);
+    border-radius: var(--border-radius-card);
+    box-shadow: var(--shadow-strong);
+    border: 1px solid var(--neutral-dark-gray);
+}
+
+.songs-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--accent-soft-gold); /* Oro suave para el título de canciones */
+    margin-bottom: 90px;
+    position: relative;
+    display: inline-block;
+}
+
+.songs-section h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -25px;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 8px;
+    background-color: var(--accent-cerulean-blue); /* Azul Cerúleo */
+    border-radius: 5px;
+}
+
+.song-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 60px;
+}
+
+.song-card {
+    background-color: var(--neutral-dark-gray); /* Gris oscuro para las tarjetas de canciones */
+    padding: 45px;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--accent-cerulean-blue); /* Borde Azul Cerúleo */
+}
+
+.song-card .song-info {
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.song-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--accent-soft-gold); /* Oro suave para títulos de canciones */
+    margin-bottom: 18px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.song-card p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.song-audio {
+    width: 100%;
+    margin-bottom: 30px;
+    /* Filtrado para que el reproductor de audio nativo contraste bien */
+    filter: invert(100%) saturate(100%) hue-rotate(180deg) brightness(1.2);
+    -webkit-filter: invert(100%) saturate(100%) hue-rotate(180deg) brightness(1.2);
+}
+
+/* Estilos para el contenedor de la letra */
+.lyrics-container {
+    background-color: var(--secondary-white); /* Fondo blanco para la letra */
+    color: var(--text-dark); /* Texto negro para la letra */
+    padding: 30px;
+    border-radius: var(--border-radius-general);
+    margin-top: 30px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    height: 250px; /* Altura fija para el recuadro */
+    overflow-y: scroll; /* Permite el desplazamiento vertical solo dentro de este recuadro */
+    scroll-behavior: smooth; /* Desplazamiento suave */
+
+    width: 100%;
+    text-align: center; /* Centrar el texto */
+    border: 1px solid var(--neutral-light-gray);
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+/* Ajustes para la barra de desplazamiento en webkit (Chrome, Safari) */
+.lyrics-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.lyrics-container::-webkit-scrollbar-track {
+    background: var(--neutral-light-gray);
+    border-radius: 10px;
+}
+
+.lyrics-container::-webkit-scrollbar-thumb {
+    background: var(--accent-cerulean-blue);
+    border-radius: 10px;
+}
+
+.lyrics-container::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-soft-gold);
+}
+
+
+/* Estilo para cada línea de la letra */
+.lyrics-line {
+    padding: 5px 0;
+    transition: color 0.3s ease, font-weight 0.3s ease, transform 0.2s ease;
+    opacity: 0.6; /* Las líneas no activas son más tenues */
+    font-size: 1em; /* Tamaño de fuente normal */
+}
+
+/* Estilo para la línea de letra activa (resaltada) */
+.lyrics-line.active-lyrics-line {
+    color: var(--accent-cerulean-blue); /* Azul Cerúleo para la línea activa */
+    font-weight: 700; /* Negrita */
+    opacity: 1; /* Completamente visible */
+    transform: scale(1.05); /* Ligeramente más grande */
+    text-shadow: 0 0 5px rgba(0, 123, 167, 0.4); /* Sombra sutil para el brillo */
+}
+
+/* Sección "Mensajes/Cartas" */
+#mensajes {
+    background-color: var(--neutral-light-gray); /* Gris claro para el fondo de mensajes */
+    color: var(--text-dark); /* Texto negro para esta sección */
+    padding: 100px 30px;
+    text-align: center;
+    border-radius: var(--border-radius-card);
+    margin: 50px auto;
+    box-shadow: var(--shadow-strong);
+    border: 1px solid var(--secondary-white);
+}
+
+#mensajes h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    color: var(--primary-black); /* Negro para el título */
+    margin-bottom: 90px;
+    position: relative;
+    display: inline-block;
+}
+
+#mensajes h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -25px;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 8px;
+    background-color: var(--accent-soft-gold); /* Oro suave */
+    border-radius: 5px;
+}
+
+.message-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.message-card {
+    background-color: var(--primary-black); /* Negro para las tarjetas de mensajes */
+    color: var(--text-light);
+    padding: 45px;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    text-align: left;
+    transition: transform 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid var(--accent-cerulean-blue); /* Borde Azul Cerúleo */
+}
+
+.message-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+}
+
+.message-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    color: var(--accent-soft-gold); /* Oro suave para títulos de mensajes */
+    margin-bottom: 25px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.message-card p {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.message-card .read-more {
+    background-color: var(--accent-cerulean-blue); /* Azul Cerúleo */
+    color: var(--secondary-white);
+    border: none;
+    padding: 15px 32px;
+    border-radius: var(--border-radius-general);
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.message-card .read-more:hover {
+    background-color: var(--accent-soft-gold); /* Oro suave en hover */
+}
+
+.message-card .full-message {
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 30px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--primary-black); /* Negro principal para el footer */
+    color: var(--text-light);
+    text-align: center;
+    padding: 45px 20px;
+    font-size: 1.1rem;
+    border-top: 10px solid var(--accent-cerulean-blue); /* Borde superior Azul Cerúleo */
+    box-shadow: inset 0 10px 20px rgba(0,0,0,0.3);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.98);
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    max-height: 90vh;
+    object-fit: contain;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 0 30px var(--shadow-strong);
+    background-color: var(--neutral-dark-gray); /* Gris oscuro para el contenido del modal */
+    padding: 30px;
+    border: 3px solid var(--accent-soft-gold);
+    display: flex; /* Usar flexbox para el reproductor de video local */
+    flex-direction: column; /* Apilar elementos verticalmente */
+    align-items: center; /* Centrar horizontalmente */
+    justify-content: center; /* Centrar verticalmente */
+}
+
+.modal-content img, .modal-content iframe {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: auto;
+    max-height: 85vh;
+    border-radius: var(--border-radius-general);
+}
+
+.modal-content iframe {
+    /* Estilos para videos de YouTube si se siguen usando */
+    height: 700px;
+    min-height: 300px; /* Asegura una altura mínima */
+}
+
+
+/* --- Custom Video Player Styles --- */
+.video-player-container {
+    width: 100%;
+    max-width: 1000px; /* Ancho máximo para el reproductor */
+    position: relative;
+    background-color: var(--primary-black);
+    border-radius: var(--border-radius-general);
+    overflow: hidden; /* Para que el video no se salga de los bordes redondeados */
+    box-shadow: var(--shadow-strong);
+}
+
+.video-player-container video {
+    width: 100%;
+    display: block; /* Elimina espacio extra debajo del video */
+    border-radius: var(--border-radius-general);
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: var(--text-light);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.video-player-container:hover .video-controls,
+.video-player-container.show-controls .video-controls { /* Para mostrar controles en pausa */
+    opacity: 1;
+}
+
+.video-controls button {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 8px;
+    transition: color 0.2s ease, transform 0.2s ease;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-controls button:hover {
+    color: var(--accent-cerulean-blue);
+    transform: scale(1.1);
+}
+
+/* Play/Pause Button Specifics */
+.video-controls button.play-pause-btn .fa-play,
+.video-controls button.play-pause-btn .fa-pause {
+    width: 20px; /* Asegura que el icono tenga un ancho fijo para evitar saltos */
+    text-align: center;
+}
+
+
+/* Progress Bar */
+.progress-bar-container {
+    flex-grow: 1;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    margin: 0 10px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--accent-cerulean-blue);
+    border-radius: 5px;
+    transition: width 0.1s linear; /* Para una actualización suave */
+}
+
+/* Time display */
+.time-display {
+    font-size: 0.9rem;
+    font-variant-numeric: tabular-nums; /* Para alinear los dígitos */
+}
+
+/* Volume Control */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-control input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    outline: none;
+    cursor: grab;
+    transition: background 0.2s ease;
+}
+
+.volume-control input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-soft-gold);
+    border-radius: 50%;
+    cursor: grab;
+    border: 2px solid var(--accent-soft-gold);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.volume-control input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    background: var(--accent-soft-gold);
+    border-radius: 50%;
+    cursor: grab;
+    border: 2px solid var(--accent-soft-gold);
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.volume-control button {
+    font-size: 1.5rem;
+}
+
+/* Fullscreen Button */
+.fullscreen-btn {
+    margin-left: auto; /* Empuja el botón a la derecha */
+}
+
+
+.close-button {
+    position: absolute;
+    top: 35px;
+    right: 55px;
+    color: var(--text-light);
+    font-size: 60px;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    text-shadow: 3px 3px 8px rgba(0,0,0,0.8);
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: var(--accent-soft-gold); /* Oro suave en hover */
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        margin-top: 25px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav ul li {
+        margin: 0 18px 18px 18px;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    #hero h1 {
+        font-size: 4.5rem;
+    }
+
+    #hero p {
+        font-size: 1.6rem;
+    }
+
+    .gallery-main-section h2, .songs-section h2, #mensajes h2 {
+        font-size: 3.5rem;
+    }
+
+    .gallery-category h3 {
+        font-size: 2.5rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .gallery-item img {
+        height: 300px;
+    }
+
+    .song-list {
+        grid-template-columns: 1fr;
+    }
+
+    .message-container {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .modal-content iframe {
+        height: 500px;
+    }
+
+    .video-player-container {
+        max-width: 100%;
+    }
+
+    .video-controls {
+        flex-wrap: wrap;
+        padding: 10px;
+        justify-content: center;
+    }
+
+    .video-controls button {
+        font-size: 1.5rem;
+        padding: 5px;
+    }
+
+    .volume-control input[type="range"] {
+        width: 60px;
+    }
+
+    .password-box {
+        padding: 40px;
+    }
+
+    .password-box p {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        font-size: 2.2rem;
+    }
+
+    #hero h1 {
+        font-size: 3.5rem;
+    }
+
+    #hero p {
+        font-size: 1.4rem;
+    }
+
+    .gallery-main-section h2, .songs-section h2, #mensajes h2 {
+        font-size: 3rem;
+    }
+
+    .gallery-category h3 {
+        font-size: 2.2rem;
+    }
+
+    .gallery-item img {
+        height: 250px;
+    }
+
+    .song-card, .message-card {
+        padding: 30px;
+    }
+
+    .lyrics-container {
+        padding: 25px;
+        height: 200px; /* Ajuste la altura para pantallas más pequeñas si es necesario */
+    }
+
+    .modal-content iframe {
+        height: 350px;
+    }
+
+    .close-button {
+        top: 20px;
+        right: 20px;
+        font-size: 45px;
+    }
+
+    .video-controls {
+        font-size: 0.9rem;
+        gap: 8px;
+    }
+    .video-controls button {
+        font-size: 1.2rem;
+    }
+}
