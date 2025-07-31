@@ -32,6 +32,94 @@ body {
     overflow-x: hidden;
 }
 
+/* --- Estilos de Botones Generales y Elegantes --- */
+
+.btn {
+    display: inline-block;
+    padding: 14px 28px; /* Tamaño generoso para un buen toque */
+    border: none;
+    border-radius: var(--border-radius-general); /* Bordes ligeramente redondeados */
+    font-family: 'Montserrat', sans-serif; /* Consistente con el resto del sitio */
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transición suave para todos los cambios */
+    letter-spacing: 0.5px; /* Ligeramente espaciado para elegancia */
+    text-transform: uppercase; /* Texto en mayúsculas para un toque formal */
+    box-shadow: var(--shadow-soft); /* Sombra sutil para profundidad */
+}
+
+/* Botón Primario: Accent Cerulean Blue */
+.btn-primary {
+    background-color: var(--accent-cerulean-blue);
+    color: var(--secondary-white);
+    border: 1px solid var(--accent-cerulean-blue); /* Borde que coincide */
+}
+
+.btn-primary:hover {
+    background-color: darken(var(--accent-cerulean-blue), 10%); /* Un poco más oscuro en hover */
+    box-shadow: var(--shadow-strong); /* Sombra más pronunciada */
+    transform: translateY(-3px); /* Efecto sutil de levantamiento */
+    border-color: var(--accent-soft-gold); /* Borde dorado en hover para contraste */
+}
+
+/* Botón Secundario: Contraste con Oro Suave */
+.btn-secondary {
+    background-color: var(--accent-soft-gold);
+    color: var(--primary-black); /* Texto oscuro sobre oro suave */
+    border: 1px solid var(--accent-soft-gold);
+}
+
+.btn-secondary:hover {
+    background-color: darken(var(--accent-soft-gold), 10%); /* Un poco más oscuro en hover */
+    box-shadow: var(--shadow-strong);
+    transform: translateY(-3px);
+    border-color: var(--accent-cerulean-blue); /* Borde azul en hover */
+}
+
+/* Botón Esbozado (Outline): Para acciones menos prominentes */
+.btn-outline {
+    background-color: transparent;
+    color: var(--accent-cerulean-blue); /* Texto azul */
+    border: 2px solid var(--accent-cerulean-blue); /* Borde azul más grueso */
+}
+
+.btn-outline:hover {
+    background-color: var(--accent-cerulean-blue); /* Relleno azul en hover */
+    color: var(--secondary-white); /* Texto blanco en hover */
+    box-shadow: var(--shadow-soft);
+    transform: translateY(-3px);
+}
+
+/* Botón de texto simple (para acciones con poco énfasis) */
+.btn-text {
+    background-color: transparent;
+    color: var(--accent-cerulean-blue);
+    padding: 10px 15px;
+    font-weight: 700;
+    text-transform: none; /* Sin mayúsculas */
+    letter-spacing: normal;
+    border-radius: var(--border-radius-general);
+    box-shadow: none;
+}
+
+.btn-text:hover {
+    color: var(--accent-soft-gold);
+    background-color: rgba(0, 0, 0, 0.1); /* Fondo sutil al pasar el ratón */
+    transform: none; /* No hay efecto de levantamiento */
+}
+
+/* Estilos para botones deshabilitados */
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(50%); /* Hace que se vea gris y menos vibrante */
+    transform: none;
+    box-shadow: none;
+}
+
 /* Overlay de Contraseña */
 #password-overlay {
     position: fixed;
@@ -398,12 +486,13 @@ nav ul li a:hover {
 .lyrics-container {
     background-color: var(--secondary-white); /* Fondo blanco para la letra */
     color: var(--text-dark); /* Texto negro para la letra */
+    font-family: 'Montserrat', sans-serif; /* Asegura la fuente Montserrat */
     padding: 30px;
     border-radius: var(--border-radius-general);
     margin-top: 30px;
     box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
     
-    height: 250px; /* Altura fija para el recuadro */
+    height: 180px; /* **Altura fija reducida** para el recuadro */
     overflow-y: scroll; /* Permite el desplazamiento vertical solo dentro de este recuadro */
     scroll-behavior: smooth; /* Desplazamiento suave */
 
@@ -412,6 +501,7 @@ nav ul li a:hover {
     border: 1px solid var(--neutral-light-gray);
     font-size: 1.1em;
     line-height: 1.6;
+    position: relative; /* Necesario para posicionar las líneas de letra dentro */
 }
 
 /* Ajustes para la barra de desplazamiento en webkit (Chrome, Safari) */
@@ -437,9 +527,11 @@ nav ul li a:hover {
 /* Estilo para cada línea de la letra */
 .lyrics-line {
     padding: 5px 0;
-    transition: color 0.3s ease, font-weight 0.3s ease, transform 0.2s ease;
+    transition: color 0.3s ease, font-weight 0.3s ease, transform 0.2s ease, opacity 0.3s ease; /* Transiciones suaves */
     opacity: 0.6; /* Las líneas no activas son más tenues */
     font-size: 1em; /* Tamaño de fuente normal */
+    display: block; /* Asegura que cada línea ocupe su propio espacio */
+    white-space: pre-wrap; /* Mantiene saltos de línea y espacios en blanco del LRC */
 }
 
 /* Estilo para la línea de letra activa (resaltada) */
@@ -449,6 +541,7 @@ nav ul li a:hover {
     opacity: 1; /* Completamente visible */
     transform: scale(1.05); /* Ligeramente más grande */
     text-shadow: 0 0 5px rgba(0, 123, 167, 0.4); /* Sombra sutil para el brillo */
+    font-size: 1.2em; /* Un poco más grande para destacar */
 }
 
 /* Sección "Mensajes/Cartas" */
@@ -594,7 +687,7 @@ footer {
     justify-content: center; /* Centrar verticalmente */
 }
 
-.modal-content img, .modal-content iframe {
+.modal-content img, .modal-content video { /* Agregado 'video' aquí */
     width: 100%;
     height: auto;
     display: block;
@@ -890,8 +983,9 @@ footer {
     }
 
     .lyrics-container {
-        padding: 25px;
-        height: 200px; /* Ajuste la altura para pantallas más pequeñas si es necesario */
+        height: 150px; /* Ajuste para pantallas pequeñas, mantenido más bajo */
+        font-size: 1.1em;
+        padding: 20px;
     }
 
     .modal-content iframe {
