@@ -5,11 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const enterButton = document.getElementById('enter-button');
     const errorText = document.getElementById('error-text');
     const mainContent = document.getElementById('main-content');
-    const CORRECT_PASSWORD = ''; // ¡Define tu contraseña aquí!
+    const CORRECT_PASSWORDS = [
+        "magodita",
+        "muñequita",
+        "nena",
+        "bodoquita", 
+        "mi amor"
+    ];
 
     if (enterButton) {
         enterButton.addEventListener('click', () => {
-            if (passwordInput.value === CORRECT_PASSWORD) {
+            // Convierte el valor del input a minúsculas para una comparación insensible a mayúsculas
+            const enteredPassword = passwordInput.value.toLowerCase();
+
+            // Comprueba si la contraseña ingresada está en el array de contraseñas correctas
+            if (CORRECT_PASSWORDS.includes(enteredPassword)) {
                 passwordOverlay.style.display = 'none';
                 mainContent.style.display = 'block';
                 // Opcional: Desplazarse al inicio del contenido principal
